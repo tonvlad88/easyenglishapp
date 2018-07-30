@@ -1,14 +1,22 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import recognizeMic from 'watson-speech/speech-to-text/recognize-microphone';
+
+import {  Button, 
+          Icon, 
+          Container, 
+          // Grid, 
+          // Image, 
+          // Divider,
+          // Item 
+        } from 'semantic-ui-react'
 
 class App extends Component {
 
   constructor() {
     super();
-    this.state = {
-      text: ''
+    this.randomWord = {
+      randomWord: 'Fetching your word. Pleas wait...'
     }
   }
 
@@ -25,7 +33,7 @@ class App extends Component {
         stream.setEncoding('utf8'); // get text instead of Buffers for on data events
         stream.on('data', (data) => {
           console.log(data);
-          data = data.replace(/[^\w\s]/gi, '');
+          // data = data.replace(/[^\w\s]/gi, '');
           
           this.setState( {text : data} )
         });
@@ -39,15 +47,66 @@ class App extends Component {
   }
 
   render() {
+    const {randomWord} = this.randomWord;
+
     return (
+
+
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-       <button onClick={this.onListenClick.bind(this)}>Listen to microphone</button>
-       <button id="stop"> STOP </button>
-       <div className="f1">{this.state.text}</div>
+
+        <Container style={{paddingTop: '15px'}}>  
+          <div className="ui grid">
+
+            <div className="one column large screen only row">
+              <div className="column">
+                <div className="ui segment">
+
+                  <div style={{
+                      border:'2px solid #e1e1e1', 
+                      padding: '50px',
+                      backgroundColor: '#eeeeee',
+                      borderRadius: '2px',
+                      textAlign: 'center',
+                      fontSize: '50px',
+                      color: '#ae432e',
+                    }} >
+                     {randomWord} 
+                  </div>
+                    
+                </div>                  
+
+              </div>              
+            </div>
+
+            <div className="one column large screen only row">
+              <div className="column">
+                <div className="ui segment" style={{textAlign: 'center'}}>
+
+                  <Button style={{fontSize: '30px'}} icon labelPosition='left' onClick={this.onListenClick.bind(this)}>
+                        <Icon name='microphone' />
+                        Start
+                      </Button>
+                       
+                      <Button style={{fontSize: '30px'}} icon labelPosition='left' id="stop">
+                        <Icon name='stop' />
+                        Stop
+                      </Button>
+                    
+                </div>                  
+
+              </div>              
+            </div>
+
+            
+          </div>    
+          
+            
+          
+        </Container>
+        
+        
+
+       
 
       </div>
     );

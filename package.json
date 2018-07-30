@@ -7,7 +7,8 @@
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-scripts": "1.1.4",
-    "tachyons": "^4.11.1",
+    "semantic-ui-css": "^2.3.3",
+    "semantic-ui-react": "^0.82.1",
     "watson-developer-cloud": "^3.7.1",
     "watson-speech": "^0.34.2"
   },

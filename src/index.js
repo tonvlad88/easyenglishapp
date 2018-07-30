@@ -4,7 +4,8 @@ import './index.css';
 import App from './containers/App';
 // import App2 from './containers/App2';
 import registerServiceWorker from './registerServiceWorker';
-import 'tachyons';
+// import 'tachyons';
+import 'semantic-ui-css/semantic.min.css';
 
 
 ReactDOM.render(<App />, document.getElementById('root'));
