@@ -15,8 +15,8 @@ class App extends Component {
 
   constructor() {
     super();
-    this.randomWord = {
-      randomWord: 'Fetching your word. Pleas wait...'
+    this.state = {
+      randomWord: 'FETCHING WORD. PLEASE WAIT...'
     }
   }
 
@@ -31,11 +31,11 @@ class App extends Component {
           object_mode: false
         });
         stream.setEncoding('utf8'); // get text instead of Buffers for on data events
-        stream.on('data', (data) => {
-          console.log(data);
+        stream.on('data', (data) => {          
           // data = data.replace(/[^\w\s]/gi, '');
-          
-          this.setState( {text : data} )
+          data = data.toUpperCase();
+    
+          this.setState( {randomWord : data} )
         });
         stream.on('error', function(err) {
             console.log(err);
@@ -47,14 +47,13 @@ class App extends Component {
   }
 
   render() {
-    const {randomWord} = this.randomWord;
+    const {randomWord} = this.state;
 
     return (
-
-
       <div className="App">
 
-        <Container style={{paddingTop: '15px'}}>  
+        <Container style={{paddingTop: '15px'}}>
+
           <div className="ui grid">
 
             <div className="one column large screen only row">
@@ -83,30 +82,22 @@ class App extends Component {
                 <div className="ui segment" style={{textAlign: 'center'}}>
 
                   <Button style={{fontSize: '30px'}} icon labelPosition='left' onClick={this.onListenClick.bind(this)}>
-                        <Icon name='microphone' />
-                        Start
-                      </Button>
-                       
-                      <Button style={{fontSize: '30px'}} icon labelPosition='left' id="stop">
-                        <Icon name='stop' />
-                        Stop
-                      </Button>
-                    
+                    <Icon name='microphone' />
+                    Start
+                  </Button> 
+
+                  <Button style={{fontSize: '30px'}} icon labelPosition='left' id="stop">
+                    <Icon name='stop' />
+                    Stop
+                  </Button>   
+
                 </div>                  
-
               </div>              
-            </div>
+            </div> 
 
-            
-          </div>    
-          
-            
-          
-        </Container>
-        
-        
+          </div>  
 
-       
+        </Container>                       
 
       </div>
     );
